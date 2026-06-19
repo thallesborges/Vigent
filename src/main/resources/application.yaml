@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: NovaBuild
+  datasource:
+    url: jdbc:postgresql://localhost:5432/NovaBuild
+    username: postgres
+    password: thbc
