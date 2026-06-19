@@ -4,7 +4,7 @@ import dev.thallesborges.NovaBuild.database.entity.PlanoEntity;
 import dev.thallesborges.NovaBuild.database.repository.PlanoRepository;
 import dev.thallesborges.NovaBuild.dto.request.CadastrarPlanoRequest;
 import dev.thallesborges.NovaBuild.dto.response.PlanoResponse;
-import dev.thallesborges.NovaBuild.exception.NomeProdutoExisteException;
+import dev.thallesborges.NovaBuild.exception.NomePlanoExisteException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,12 @@ public class PlanoService {
 
     public PlanoResponse cadastrarPlano(CadastrarPlanoRequest request){
         if (planoRepository.existsByNome(request.nome())) {
-            throw new NomeProdutoExisteException("Nome já cadastrado previamente: " + request.nome());
+            throw new NomePlanoExisteException("Nome já cadastrado previamente: " + request.nome());
         }
 
         PlanoEntity novoPlano = PlanoEntity.builder()
                 .nome(request.nome())
                 .preco(request.preco())
-                .criadoEm(Instant.now())
                 .build();
 
         PlanoEntity savedPlano = planoRepository.save(novoPlano);
@@ -32,8 +31,7 @@ public class PlanoService {
                 savedPlano.getId(),
                 savedPlano.getNome(),
                 savedPlano.getPreco(),
-                savedPlano.getStatus(),
-                savedPlano.getCriadoEm()
+                savedPlano.getStatus()
         );
     }
 }

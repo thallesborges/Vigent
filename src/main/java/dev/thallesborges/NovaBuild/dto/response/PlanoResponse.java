@@ -9,18 +9,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 public record PlanoResponse(
-        @Id
         Long id,
-
-        @NotBlank
         String nome,
-
-        @NotNull
         BigDecimal preco,
-
-        @NotBlank
-        Status status,
-
-        @NotNull
-        Instant criadoEm
+        Status status
 ) {}

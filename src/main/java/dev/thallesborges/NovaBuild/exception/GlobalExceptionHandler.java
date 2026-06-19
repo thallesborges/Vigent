@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleNomeProdutoExiste(NomeProdutoExisteException ex) {
+    public ResponseEntity<ErrorResponse> handleNomeProdutoExiste(NomePlanoExisteException ex) {
         return buildError(HttpStatus.CONFLICT, ex.getMessage());
     }
 

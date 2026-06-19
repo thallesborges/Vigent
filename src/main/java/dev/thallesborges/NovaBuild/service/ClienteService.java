@@ -32,9 +32,12 @@ public class ClienteService {
             throw new TelefoneExisteException("Telefone já cadastrado no sistema");
         }
 
-        if (request.cnpj().length() != 14) {
+        String regexCnpj = request.cnpj().replaceAll("\\D", "");
+        Long cnpj = Long.parseLong(regexCnpj);
+
+        if (regexCnpj.length() != 14) {
             throw new CnpjInvalidoException("CNPJ deve conter exatamente 14 dígitos numéricos");
-        } else if (!CnpjValidator.isValido(request.cnpj())) {
+        } else if (!CnpjValidator.isValido(cnpj)) {
             throw new CnpjInvalidoException("CNPJ inválido");
         }
 

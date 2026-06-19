@@ -5,14 +5,18 @@ import dev.thallesborges.NovaBuild.exception.CnpjInvalidoException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CnpjValidator {
-    public static boolean isValido(String cnpj) {
-        String regexCnpj = cnpj.replaceAll("\\D", "");
+    public static boolean isValido(Long cnpj) {
 
         // Transforma o texto em uma lista com todos os 14 dígitos originais
         List<Integer> digitosCnpj = new ArrayList<>(
-                regexCnpj.chars().map(Character::getNumericValue).boxed().toList()
+                Long.toString(cnpj)
+                        .chars()
+                        .map(Character::getNumericValue)
+                        .boxed()
+                        .collect(Collectors.toList())
         );
 
         // Salva os dígitos verificadores reais informados no CNPJ

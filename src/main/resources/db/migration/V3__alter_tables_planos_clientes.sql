@@ -1,0 +1,3 @@
+ALTER TABLE planos DROP COLUMN criado_em;
+
+ALTER TABLE clientes ALTER COLUMN cnpj TYPE VARCHAR(20);
