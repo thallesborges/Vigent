@@ -22,32 +22,17 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleEmailExiste(EmailExisteException ex) {
+    public ResponseEntity<ErrorResponse> handleResourceExistenteException(ResourceExistenteException ex) {
         return buildError(HttpStatus.CONFLICT, ex.getMessage());
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleNomeProdutoExiste(NomePlanoExisteException ex) {
-        return buildError(HttpStatus.CONFLICT, ex.getMessage());
+    public ResponseEntity<ErrorResponse> handleResourceNotFoundException(Exception ex) {
+        return buildError(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleCnpjInvalido(CnpjInvalidoException ex) {
         return buildError(HttpStatus.BAD_REQUEST, ex.getMessage());
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleRazaoSocialExiste(RazaoSocialExisteException ex) {
-        return buildError(HttpStatus.CONFLICT, ex.getMessage());
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleTelefoneExiste(TelefoneExisteException ex) {
-        return buildError(HttpStatus.CONFLICT, ex.getMessage());
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handlePlanoNotFound(PlanoNotFoundException ex) {
-        return buildError(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 }

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "planos")
-public class PlanoEntity {
+public class PlanoEntity extends AuditoriaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,9 +27,6 @@ public class PlanoEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Status status = Status.ATIVO;
-
-    @OneToMany(mappedBy = "plano", fetch = FetchType.LAZY)
-    private List<ClienteEntity> clientes = new ArrayList<>();
 
     @OneToMany(mappedBy = "plano", fetch = FetchType.LAZY)
     private List<AssinaturaEntity> assinaturas = new ArrayList<>();

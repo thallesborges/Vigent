@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "clientes")
-public class ClienteEntity {
+public class ClienteEntity extends AuditoriaEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,10 +30,6 @@ public class ClienteEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Status status =  Status.ATIVO;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "plano_id")
-    private PlanoEntity plano;
 
     @OneToOne(mappedBy = "cliente")
     private AssinaturaEntity assinatura;

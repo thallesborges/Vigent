@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "assinaturas")
-public class AssinaturaEntity {
+public class AssinaturaEntity extends AuditoriaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

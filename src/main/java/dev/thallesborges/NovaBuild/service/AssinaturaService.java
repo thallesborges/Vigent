@@ -8,8 +8,7 @@ import dev.thallesborges.NovaBuild.database.repository.ClienteRepository;
 import dev.thallesborges.NovaBuild.database.repository.PlanoRepository;
 import dev.thallesborges.NovaBuild.dto.request.CadastrarAssinaturaRequest;
 import dev.thallesborges.NovaBuild.dto.response.AssinaturaResponse;
-import dev.thallesborges.NovaBuild.exception.NomePlanoExisteException;
-import dev.thallesborges.NovaBuild.exception.RazaoSocialExisteException;
+import dev.thallesborges.NovaBuild.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +21,10 @@ public class AssinaturaService {
 
     public AssinaturaResponse cadastrarAssinatura(CadastrarAssinaturaRequest request) {
         ClienteEntity cliente = clienteRepository.findByRazaoSocial(request.razaoSocialCliente())
-                .orElseThrow(() -> new RazaoSocialExisteException("Cliente não encontrado: " + request.razaoSocialCliente()));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado: " + request.razaoSocialCliente()));
 
         PlanoEntity plano = planoRepository.findByNome(request.nomePlano())
-                .orElseThrow(() -> new NomePlanoExisteException("Plano não encontrado: " + request.nomePlano()));
+                .orElseThrow(() -> new ResourceNotFoundException("Plano não encontrado: " + request.nomePlano()));
 
         AssinaturaEntity novaAssinatura = AssinaturaEntity.builder()
                 .cliente(cliente)

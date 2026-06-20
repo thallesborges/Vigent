@@ -21,8 +21,5 @@ public record CadastrarClienteRequest(
         String emailFinanceiro,
 
         @NotBlank
-        String telefone,
-
-        @NotBlank
-        String plano
+        String telefone
 ) {}

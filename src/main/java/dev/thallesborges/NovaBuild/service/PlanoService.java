@@ -4,11 +4,9 @@ import dev.thallesborges.NovaBuild.database.entity.PlanoEntity;
 import dev.thallesborges.NovaBuild.database.repository.PlanoRepository;
 import dev.thallesborges.NovaBuild.dto.request.CadastrarPlanoRequest;
 import dev.thallesborges.NovaBuild.dto.response.PlanoResponse;
-import dev.thallesborges.NovaBuild.exception.NomePlanoExisteException;
+import dev.thallesborges.NovaBuild.exception.ResourceExistenteException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +15,7 @@ public class PlanoService {
 
     public PlanoResponse cadastrarPlano(CadastrarPlanoRequest request){
         if (planoRepository.existsByNome(request.nome())) {
-            throw new NomePlanoExisteException("Nome já cadastrado previamente: " + request.nome());
+            throw new ResourceExistenteException("Nome já cadastrado previamente: " + request.nome());
         }
 
         PlanoEntity novoPlano = PlanoEntity.builder()
